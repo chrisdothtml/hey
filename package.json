@@ -1,0 +1,14 @@
+{
+  "name": "heycli",
+  "version": "0.0.1",
+  "description": "A pleasant, human-readable interface to terminal commands",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "bin": {
+    "hey": "bin/hey"
+  },
+  "dependencies": {
+    "shelljs": "^0.7.8",
+    "trash": "^4.1.0"
+  }
+}
