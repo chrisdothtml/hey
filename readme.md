@@ -10,3 +10,7 @@ yarn global add heycli
 # npm works too
 npm install --global heycli
 ```
+
+## License
+
+[MIT](license)
