@@ -1,6 +1,6 @@
 # hey
 
-> A pleasant, human-readable interface to terminal commands
+> A human-readable interface for terminal commands
 
 ## Install
 

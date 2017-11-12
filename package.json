@@ -1,7 +1,7 @@
 {
   "name": "heycli",
   "version": "0.0.1",
-  "description": "A pleasant, human-readable interface to terminal commands",
+  "description": "A human-readable interface for terminal commands",
   "license": "MIT",
   "main": "lib/index.js",
   "bin": {
