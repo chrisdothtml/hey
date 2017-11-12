@@ -15,6 +15,10 @@ hey
     [glob]: (files matching glob)
     ...from [path]: (files matching glob) (temp change cwd)
 
+  find: find
+    [glob]: (files matching glob)
+    ...in [path]: (files matching glob) (temp change cwd)
+
   go: cd
     back: -
     home: ~
