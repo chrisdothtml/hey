@@ -8,7 +8,7 @@
     "hey": "bin/hey"
   },
   "scripts": {
-    "lint": "standard '*(lib|test)/*.js' --verbose | snazzy",
+    "lint": "standard '*(lib|test)/**/*.js' --verbose | snazzy",
     "prepush": "yarn lint && yarn test",
     "test": "mocha -R min"
   },
