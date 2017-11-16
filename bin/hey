@@ -1,3 +1,8 @@
 #! /usr/bin/env node
 
-require('../lib/index.js')(process.argv.slice(2)).catch(console.error)
+const meta = require('../package.json')
+const path = require('path')
+const hey = require(path.join('../', meta.main))
+
+hey(process.argv.slice(2))
+  .catch(console.error)
