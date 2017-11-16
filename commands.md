@@ -37,7 +37,7 @@ $ hey find '*.txt' from some/dir
 
 ### make
 
-Alias for `create`
+Alias for [create](#create)
 
 ### where
 
