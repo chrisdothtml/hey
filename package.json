@@ -13,6 +13,7 @@
     "test": "mocha -R min"
   },
   "dependencies": {
+    "chalk": "^2.3.0",
     "glob": "^7.1.2",
     "shelljs": "^0.7.8",
     "trash": "^4.1.0"
