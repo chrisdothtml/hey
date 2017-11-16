@@ -2,7 +2,19 @@
   "name": "heycli",
   "version": "0.0.1",
   "description": "A human-readable interface for terminal commands",
+  "keywords": [
+    "cli",
+    "command",
+    "glob",
+    "human",
+    "readable",
+    "terminal"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
   "license": "MIT",
+  "repository": "github:chrisdothtml/hey",
   "main": "lib/index.js",
   "bin": {
     "hey": "bin/hey"
