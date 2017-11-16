@@ -1,15 +1,20 @@
 # Commands
 
-- [copy](#copy)
+- [create](#create)
 - [delete](#delete)
 - [find](#find)
-- [open](#open)
+- [make](#make)
 - [where](#where)
 
-### copy
+### create
+
+Create new files and/or directories
 
 ```bash
-$
+$ hey create dir/file.txt
+$ hey create dir/that/doesnt/exist
+$ hey create file.txt other-file.txt in dir
+$ hey create file.txt in dir/that/doesnt/exist
 ```
 
 ### delete
@@ -30,11 +35,9 @@ $ hey find '*.txt' in some/dir
 $ hey find '*.txt' from some/dir
 ```
 
-### open
+### make
 
-```bash
-$
-```
+Alias for `create`
 
 ### where
 
