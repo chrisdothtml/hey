@@ -3,6 +3,7 @@
 - [create](#create)
 - [delete](#delete)
 - [find](#find)
+- [list](#list)
 - [make](#make)
 - [where](#where)
 
@@ -29,10 +30,14 @@ $ hey delete '*.txt' in dir
 
 ### find
 
+Alias for [list](#list)
+
+### list
+
 ```bash
-$ hey find '*.txt'
-$ hey find '*.txt' in some/dir
-$ hey find '*.txt' from some/dir
+$ hey list '*.txt'
+$ hey list '*.txt' in some/dir
+$ hey list '*.txt' from some/dir
 ```
 
 ### make
