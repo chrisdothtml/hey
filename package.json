@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "chalk": "^2.3.0",
-    "glob": "^7.1.2",
+    "globby": "^8.0.1",
+    "pfs": "^2.1.2",
     "shelljs": "^0.7.8",
     "trash": "^4.1.0"
   },
