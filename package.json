@@ -24,6 +24,9 @@
     "prepush": "yarn lint && yarn test",
     "test": "mocha -R min"
   },
+  "standard": {
+    "env": "mocha"
+  },
   "dependencies": {
     "chalk": "^2.3.2",
     "globby": "^8.0.1",

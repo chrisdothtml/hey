@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 const parseCommand = require('../lib/parse-command.js')
 const { expect } = require('chai')
 
