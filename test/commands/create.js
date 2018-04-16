@@ -3,7 +3,7 @@ const {
   removeFixtures,
   runWithFixture,
   testFixture
-} = require('../_utils.js')
+} = require('./_utils.js')
 
 describe('hey create', () => {
   before(() => {

@@ -1,16 +1,17 @@
 const childProcess = require('child_process')
 const del = require('del')
 const globby = require('globby')
-const meta = require('../package.json')
+const meta = require('../../package.json')
 const path = require('path')
 const shell = require('shelljs')
 const { expect } = require('chai')
 const { promisify } = require('util')
-const { isDirectory, makeDir } = require('../lib/_utils.js')
+const { isDirectory, makeDir } = require('../../lib/_utils.js')
 
 const execFile = promisify(childProcess.execFile)
-const BIN_PATH = meta.bin.hey
-const FIXTURES_DIR = path.join(__dirname, '..', '.temp')
+const ROOT_PATH = path.join(__dirname, '..', '..')
+const BIN_PATH = path.join(ROOT_PATH, meta.bin.hey)
+const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
 
 exports.createFixtures = async function (fixtures) {
   await Promise.all(
@@ -50,11 +51,10 @@ exports.removeFixtures = async function (fixtures = []) {
 }
 
 exports.runWithFixture = async function (fixture, command) {
-  const binPath = path.join(__dirname, '..', BIN_PATH)
   const fixtureDir = path.join(FIXTURES_DIR, fixture)
   const args = command.split(' ')
 
-  return execFile(binPath, args.slice(1), { cwd: fixtureDir })
+  return execFile(BIN_PATH, args.slice(1), { cwd: fixtureDir })
 }
 
 exports.testFixture = async function (fixture, expected) {
