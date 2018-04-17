@@ -41,7 +41,7 @@ See [command list](commands.md) for more info
 
 ## Reference
 
-- [node-glob](https://github.com/isaacs/node-glob)
+- [globby](https://github.com/sindresorhus/globby)
 
 - [terminal cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)
 
