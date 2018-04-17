@@ -13,6 +13,8 @@ const ROOT_PATH = path.join(__dirname, '..', '..')
 const BIN_PATH = path.join(ROOT_PATH, meta.bin.hey)
 const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
 
+exports.FIXTURES_DIR = FIXTURES_DIR
+
 exports.createFixtures = async function (fixtures) {
   await Promise.all(
     Object.keys(fixtures).map(async (fixtureName) => {
@@ -53,8 +55,9 @@ exports.removeFixtures = async function (fixtures = []) {
 exports.runWithFixture = async function (fixture, command) {
   const fixtureDir = path.join(FIXTURES_DIR, fixture)
   const args = command.split(' ')
+  const { stdout } = await execFile(BIN_PATH, args.slice(1), { cwd: fixtureDir })
 
-  return execFile(BIN_PATH, args.slice(1), { cwd: fixtureDir })
+  return stdout.replace(/\n$/, '')
 }
 
 exports.testFixture = async function (fixture, expected) {
