@@ -5,6 +5,8 @@ const {
   testFixture
 } = require('./_utils.js')
 
+// TODO: add test to cover creating dir that already exists (checking warning)
+
 describe('hey create', () => {
   before(() => {
     return createFixtures({
