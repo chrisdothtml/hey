@@ -53,11 +53,17 @@ exports.removeFixtures = async function (fixtures = []) {
 }
 
 exports.runWithFixture = async function (fixture, command) {
-  const fixtureDir = path.join(FIXTURES_DIR, fixture)
+  const fixtureDir = fixture ? path.join(FIXTURES_DIR, fixture) : process.cwd()
   const args = command.split(' ')
-  const { stdout } = await execFile(BIN_PATH, args.slice(1), { cwd: fixtureDir })
+  const result = await execFile(BIN_PATH, args.slice(1), {
+    cwd: fixtureDir,
+    env: Object.assign({}, process.env, {
+      // disable chalk colors
+      FORCE_COLOR: 0
+    })
+  })
 
-  return stdout.replace(/\n$/, '')
+  return result.stderr || (result.stdout || '').replace(/\n$/, '')
 }
 
 exports.testFixture = async function (fixture, expected) {
