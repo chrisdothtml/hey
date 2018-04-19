@@ -29,9 +29,9 @@ exports.createFixtures = async function (fixtures) {
           // prepend path to fixture dir
           .map(filepath => path.join(fixtureDir, filepath))
           .map(async (filepath) => {
-            const { base, dir } = path.parse(filepath)
-            const hasFile = isDirectory(base)
-            const dirPath = hasFile ? filepath : dir
+            const { base, dir, name } = path.parse(filepath)
+            const hasFile = isDirectory(name)
+            const dirPath = hasFile ? dir : filepath
 
             await makeDir(dirPath, { silentFail: true })
 
