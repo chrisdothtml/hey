@@ -12,6 +12,11 @@ const FIXTURES = {
     'bar.txt',
     'baz.js'
   ],
+  'listJs': [
+    'foo.js',
+    'bar.txt',
+    'baz.js'
+  ],
   'listDeep': [
     'foo.js',
     'bar.txt',
@@ -32,6 +37,14 @@ describe('hey list', () => {
 
   after(() => {
     return removeFixtures(Object.keys(FIXTURES))
+  })
+
+  it('outputs files in current directory if no pattern provided', async () => {
+    const result = await runWithFixture('list', 'hey list')
+
+    expect(
+      result.split('\n')
+    ).to.have.members(FIXTURES.list)
   })
 
   it('outputs only files matching the provided pattern', async () => {
