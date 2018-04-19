@@ -8,8 +8,8 @@ const {
 describe('hey delete', () => {
   before(() => {
     return createFixtures({
-      'delete': ['one.txt', 'two.js'],
-      'deleteFrom': ['subDir/one.txt', 'subDir/two.js']
+      'delete': ['foo.txt', 'bar.js'],
+      'deleteFrom': ['subDir/foo.txt', 'subDir/bar.js']
     })
   })
 
