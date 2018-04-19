@@ -19,7 +19,7 @@ describe('hey find', () => {
   })
 
   it('is an alias for `list`', async () => {
-    const result = await runWithFixture('find', `hey find *.js`)
+    const result = await runWithFixture('find', 'hey find *.js')
 
     expect(
       result.split('\n')

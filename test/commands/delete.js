@@ -18,12 +18,12 @@ describe('hey delete', () => {
   })
 
   it('deletes the provided files', async () => {
-    await runWithFixture('delete', `hey delete *`)
+    await runWithFixture('delete', 'hey delete *')
     await testFixture('delete', [])
   })
 
   it('deletes the provided files from the provided directory', async () => {
-    await runWithFixture('deleteFrom', `hey delete * from subDir`)
+    await runWithFixture('deleteFrom', 'hey delete * from subDir')
     await testFixture('deleteFrom', ['subDir'])
   })
 })

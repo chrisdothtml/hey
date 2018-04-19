@@ -17,7 +17,7 @@ describe('hey make', () => {
   })
 
   it('is an alias for `create`', async () => {
-    await runWithFixture('make', `hey make foo.txt`)
+    await runWithFixture('make', 'hey make foo.txt')
     await testFixture('make', ['foo.txt'])
   })
 })

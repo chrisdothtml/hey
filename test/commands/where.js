@@ -17,7 +17,7 @@ describe('hey where', () => {
   })
 
   it('outputs the cwd', async () => {
-    const result = await runWithFixture('where', `hey where am I`)
+    const result = await runWithFixture('where', 'hey where am I')
     expect(result).to.equal(path.join(FIXTURES_DIR, 'where'))
   })
 })

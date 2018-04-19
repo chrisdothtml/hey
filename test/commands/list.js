@@ -35,7 +35,7 @@ describe('hey list', () => {
   })
 
   it('outputs only files matching the provided pattern', async () => {
-    const result = await runWithFixture('list', `hey list *.js`)
+    const result = await runWithFixture('listJs', 'hey list *.js')
 
     expect(
       result.split('\n')
@@ -45,7 +45,7 @@ describe('hey list', () => {
   })
 
   it('outputs deep files matching the provided pattern', async () => {
-    const result = await runWithFixture('listDeep', `hey list **/*`)
+    const result = await runWithFixture('listDeep', 'hey list **/*')
 
     expect(
       result.split('\n')
@@ -53,7 +53,7 @@ describe('hey list', () => {
   })
 
   it('outputs files matching the provided pattern from the provided directory', async () => {
-    const result = await runWithFixture('listFrom', `hey list *.* from subDir`)
+    const result = await runWithFixture('listFrom', 'hey list *.* from subDir')
 
     expect(
       result.split('\n')
