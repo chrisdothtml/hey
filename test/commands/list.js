@@ -12,11 +12,6 @@ const FIXTURES = {
     'bar.txt',
     'baz.js'
   ],
-  'listJs': [
-    'foo.js',
-    'bar.txt',
-    'baz.js'
-  ],
   'listDeep': [
     'foo.js',
     'bar.txt',
@@ -48,7 +43,7 @@ describe('hey list', () => {
   })
 
   it('outputs only files matching the provided pattern', async () => {
-    const result = await runWithFixture('listJs', 'hey list *.js')
+    const result = await runWithFixture('list', 'hey list *.js')
 
     expect(
       result.split('\n')
