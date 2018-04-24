@@ -9,11 +9,17 @@ const { promisify } = require('util')
 const { isDirectory, makeDir } = require('../../lib/_utils.js')
 
 const execFile = promisify(childProcess.execFile)
-const ROOT_PATH = path.join(__dirname, '..', '..')
-const BIN_PATH = path.join(ROOT_PATH, meta.bin.hey)
+const ROOT_PATH = path.resolve(__dirname, '../..')
+const BIN_PATH = path.resolve(ROOT_PATH, meta.bin.hey)
 const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
 
 exports.FIXTURES_DIR = FIXTURES_DIR
+
+function normalizeSlashes (type, filepath) {
+  const slash = type === 'os' ? path.sep : type
+  return filepath.replace(/\\|\//g, slash)
+}
+exports.normalizeSlashes = normalizeSlashes
 
 exports.createFixtures = async function (fixtures) {
   await Promise.all(
@@ -24,8 +30,7 @@ exports.createFixtures = async function (fixtures) {
       await makeDir(fixtureDir, { silentFail: true })
       await Promise.all(
         filepaths
-          // replace slashes with os-specific
-          .map(filepath => filepath.replace(/\//g, path.sep))
+          .map(normalizeSlashes.bind(null, 'os'))
           // prepend path to fixture dir
           .map(filepath => path.join(fixtureDir, filepath))
           .map(async (filepath) => {
@@ -55,7 +60,7 @@ exports.removeFixtures = async function (fixtures = []) {
 exports.runWithFixture = async function (fixture, command) {
   const fixtureDir = fixture ? path.join(FIXTURES_DIR, fixture) : process.cwd()
   const args = command.split(' ')
-  const result = await execFile(BIN_PATH, args.slice(1), {
+  const result = await execFile(process.execPath, [BIN_PATH].concat(args.slice(1)), {
     cwd: fixtureDir,
     env: Object.assign({}, process.env, {
       // disable chalk colors
@@ -68,7 +73,11 @@ exports.runWithFixture = async function (fixture, command) {
 
 exports.testFixture = async function (fixture, expected) {
   const fixtureDir = path.join(FIXTURES_DIR, fixture)
-  const filepaths = await globby('**/*', { cwd: fixtureDir, onlyFiles: false })
+  const filepaths = await globby('**/*', {
+    cwd: fixtureDir,
+    onlyFiles: false,
+    transform: normalizeSlashes.bind(null, '/')
+  })
 
   expect(
     // filter out directories that have files in them

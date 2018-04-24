@@ -2,6 +2,7 @@ const path = require('path')
 const { expect } = require('chai')
 const {
   createFixtures,
+  normalizeSlashes,
   removeFixtures,
   runWithFixture
 } = require('./_utils.js')
@@ -38,7 +39,7 @@ describe('hey list', () => {
     const result = await runWithFixture('list', 'hey list')
 
     expect(
-      result.split('\n')
+      normalizeSlashes('/', result).split('\n')
     ).to.have.members(FIXTURES.list)
   })
 
@@ -46,7 +47,7 @@ describe('hey list', () => {
     const result = await runWithFixture('list', 'hey list *.js')
 
     expect(
-      result.split('\n')
+      normalizeSlashes('/', result).split('\n')
     ).to.have.members(
       FIXTURES.list.filter(filepath => path.extname(filepath) === '.js')
     )
@@ -56,7 +57,7 @@ describe('hey list', () => {
     const result = await runWithFixture('listDeep', 'hey list **/*')
 
     expect(
-      result.split('\n')
+      normalizeSlashes('/', result).split('\n')
     ).to.have.members(FIXTURES.listDeep)
   })
 
@@ -64,7 +65,7 @@ describe('hey list', () => {
     const result = await runWithFixture('listFrom', 'hey list *.* from subDir')
 
     expect(
-      result.split('\n')
+      normalizeSlashes('/', result).split('\n')
     ).to.have.members(FIXTURES.listFrom)
   })
 })
