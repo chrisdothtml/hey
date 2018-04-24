@@ -1,5 +1,9 @@
 # hey
 
+[![StandardJS](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![travis-ci build status](https://api.travis-ci.org/chrisdothtml/hey.svg?branch=master)](https://travis-ci.org/chrisdothtml/hey/branches)
+[![appveyor build status](https://ci.appveyor.com/api/projects/status/a9pgib0css58hkhk/branch/master?svg=true)](https://ci.appveyor.com/project/chrisdothtml/hey)
+
 > A human-readable interface for terminal commands
 
 ## Install
