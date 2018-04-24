@@ -20,9 +20,9 @@
     "hey": "bin/hey"
   },
   "scripts": {
-    "coverage": "nyc yarn test",
+    "coverage": "nyc npm test",
     "lint": "standard '*(lib|test)/**/*.js' --verbose | snazzy",
-    "prepush": "yarn lint && yarn test",
+    "prepush": "npm run lint",
     "test": "mocha --recursive -R min"
   },
   "standard": {
