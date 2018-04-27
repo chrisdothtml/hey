@@ -1,3 +1,4 @@
+const { expect } = require('chai')
 const {
   createFixtures,
   removeFixtures,
@@ -5,19 +6,18 @@ const {
   testFixture
 } = require('./_utils.js')
 
-// TODO: add test to cover creating dir that already exists (checking warning)
-
 describe('hey create', () => {
   before(() => {
     return createFixtures({
       'create': [],
       'createDeep': [],
+      'createDuplicate': ['foo.txt'],
       'createIn': []
     })
   })
 
   after(() => {
-    return removeFixtures(['create', 'createDeep', 'createIn'])
+    return removeFixtures(['create', 'createDeep', 'createDuplicate', 'createIn'])
   })
 
   it('creates the provided files', async () => {
@@ -36,5 +36,10 @@ describe('hey create', () => {
       'deep/deeper/foo.txt',
       'deep/bar.js'
     ])
+  })
+
+  it('warns if a provided file already exists', async () => {
+    const result = await runWithFixture('createDuplicate', 'hey create foo.txt')
+    expect(result).to.include('create: already exists: foo.txt')
   })
 })
