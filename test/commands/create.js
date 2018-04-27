@@ -21,8 +21,8 @@ describe('hey create', () => {
   })
 
   it('creates the provided files', async () => {
-    await runWithFixture('create', 'hey create foo.txt bar.js')
-    await testFixture('create', ['foo.txt', 'bar.js'])
+    await runWithFixture('create', 'hey create foo.txt bar.js baz')
+    await testFixture('create', ['foo.txt', 'bar.js', 'baz'])
   })
 
   it('creates the provided files in the provided directory', async () => {
