@@ -8,7 +8,13 @@
     "glob",
     "human",
     "readable",
-    "terminal"
+    "terminal",
+    "create",
+    "delete",
+    "find",
+    "list",
+    "make",
+    "trash"
   ],
   "engines": {
     "node": ">=8"
