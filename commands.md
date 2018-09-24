@@ -9,7 +9,7 @@
 
 ### create
 
-Create new files and/or directories
+Create new files/directories
 
 ```bash
 $ hey create dir/file.txt
@@ -20,7 +20,7 @@ $ hey create file.txt in dir/that/doesnt/exist
 
 ### delete
 
-Move files to trash
+Move files/directories to trash
 
 ```bash
 $ hey delete 'dir/*.txt'
