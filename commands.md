@@ -2,9 +2,12 @@
 
 - [create](#create)
 - [delete](#delete)
+- [destroy](#destroy)
 - [find](#find)
 - [list](#list)
 - [make](#make)
+- [remove](#remove)
+- [trash](#trash)
 - [where](#where)
 
 ### create
