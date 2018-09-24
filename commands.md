@@ -44,6 +44,10 @@ $ hey list '*.txt' from some/dir
 
 Alias for [create](#create)
 
+### trash
+
+Alias for [delete](#delete)
+
 ### where
 
 Print current working directory
