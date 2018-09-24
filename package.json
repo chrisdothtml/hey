@@ -23,7 +23,7 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "standard '*(lib|test)/**/*.js' --verbose | snazzy",
     "prepush": "npm run lint",
-    "test": "mocha --recursive -R min -t 5s",
+    "test": "mocha --recursive -R list -t 5s",
     "test+coverage": "nyc npm test"
   },
   "standard": {
