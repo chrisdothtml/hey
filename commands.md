@@ -28,6 +28,10 @@ $ hey delete '*.txt' from dir
 $ hey delete '*.txt' in dir
 ```
 
+### destroy
+
+Alias for [remove](#remove)
+
 ### find
 
 Alias for [list](#list)
@@ -43,6 +47,16 @@ $ hey list '*.txt' from some/dir
 ### make
 
 Alias for [create](#create)
+
+### remove
+
+Remove files/directories (**does not move to trash; use [delete](#delete) or [trash](#trash) for that**)
+
+```bash
+$ hey remove 'dir/*.txt'
+$ hey remove '*.txt' from dir
+$ hey remove '*.txt' in dir
+```
 
 ### trash
 

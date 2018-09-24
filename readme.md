@@ -33,7 +33,7 @@ $ hey move assets/logo.png to images
 #### ...or globs
 
 ```bash
-$ hey delete '**/bower.json' from ~/Projects
+$ hey destroy '**/bower.json' from ~/Projects
 ```
 
 #### Let `hey` do the thinking for you
