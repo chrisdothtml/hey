@@ -1,5 +1,5 @@
 const childProcess = require('child_process')
-const del = require('del')
+const fse = require('fs-extra')
 const globby = require('globby')
 const meta = require('../../package.json')
 const path = require('path')
@@ -54,7 +54,11 @@ exports.createFixtures = async function (fixtures) {
 }
 
 exports.removeFixtures = async function (fixtures = []) {
-  return del(fixtures, { cwd: FIXTURES_DIR })
+  return Promise.all(
+    fixtures.map(async (fixtureName) => {
+      return fse.remove(path.join(FIXTURES_DIR, fixtureName))
+    })
+  )
 }
 
 exports.runWithFixture = async function (fixture, command) {
