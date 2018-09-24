@@ -22,6 +22,10 @@
   "license": "MIT",
   "repository": "github:chrisdothtml/hey",
   "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib"
+  ],
   "bin": {
     "hey": "bin/hey"
   },
