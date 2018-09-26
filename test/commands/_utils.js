@@ -22,8 +22,10 @@ function normalizeSlashes (type, filepath) {
 exports.normalizeSlashes = normalizeSlashes
 
 exports.createFixtures = async function (fixtures) {
+  const fixtureNames = Object.keys(fixtures)
+
   await Promise.all(
-    Object.keys(fixtures).map(async (fixtureName) => {
+    fixtureNames.map(async (fixtureName) => {
       const fixtureDir = path.join(FIXTURES_DIR, fixtureName)
       const filepaths = fixtures[fixtureName]
 
@@ -51,6 +53,8 @@ exports.createFixtures = async function (fixtures) {
       )
     })
   )
+
+  return fixtureNames
 }
 
 exports.removeFixtures = async function (fixtures = []) {

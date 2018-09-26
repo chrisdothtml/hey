@@ -12,14 +12,16 @@ const aliasMap = new Map([
 // running the same suite for both aliases
 for (const [ alias, command ] of aliasMap) {
   describe(`hey ${alias}`, () => {
-    before(() => {
-      return createFixtures({
+    let fixtureNames
+
+    before(async () => {
+      fixtureNames = await createFixtures({
         [alias]: ['foo.txt', 'bar.js']
       })
     })
 
     after(() => {
-      return removeFixtures([alias])
+      return removeFixtures(fixtureNames)
     })
 
     it(`is an alias for \`${command}\``, async () => {

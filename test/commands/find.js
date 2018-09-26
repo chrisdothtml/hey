@@ -10,12 +10,14 @@ const FIXTURES = {
 }
 
 describe('hey find', () => {
-  before(() => {
-    return createFixtures(FIXTURES)
+  let fixtureNames
+
+  before(async () => {
+    fixtureNames = await createFixtures(FIXTURES)
   })
 
   after(() => {
-    return removeFixtures(Object.keys(FIXTURES))
+    return removeFixtures(fixtureNames)
   })
 
   it('is an alias for `list`', async () => {

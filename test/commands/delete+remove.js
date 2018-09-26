@@ -8,15 +8,17 @@ const {
 // running the same suite for both commands
 for (const command of ['delete', 'remove']) {
   describe(`hey ${command}`, () => {
-    before(() => {
-      return createFixtures({
+    let fixtureNames
+
+    before(async () => {
+      fixtureNames = await createFixtures({
         [command]: ['foo.txt', 'bar.js'],
         [`${command}From`]: ['subDir/foo.txt', 'subDir/bar.js']
       })
     })
 
     after(() => {
-      return removeFixtures([command, `${command}From`])
+      return removeFixtures(fixtureNames)
     })
 
     it(`${command}s the provided files`, async () => {

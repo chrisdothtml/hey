@@ -27,12 +27,14 @@ const FIXTURES = {
 }
 
 describe('hey list', () => {
-  before(() => {
-    return createFixtures(FIXTURES)
+  let fixtureNames
+
+  before(async () => {
+    fixtureNames = await createFixtures(FIXTURES)
   })
 
   after(() => {
-    return removeFixtures(Object.keys(FIXTURES))
+    return removeFixtures(fixtureNames)
   })
 
   it('outputs files in current directory if no pattern provided', async () => {

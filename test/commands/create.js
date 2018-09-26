@@ -7,8 +7,10 @@ const {
 } = require('./_utils.js')
 
 describe('hey create', () => {
-  before(() => {
-    return createFixtures({
+  let fixtureNames
+
+  before(async () => {
+    fixtureNames = await createFixtures({
       'create': [],
       'createDeep': [],
       'createDuplicate': ['foo.txt'],
@@ -17,7 +19,7 @@ describe('hey create', () => {
   })
 
   after(() => {
-    return removeFixtures(['create', 'createDeep', 'createDuplicate', 'createIn'])
+    return removeFixtures(fixtureNames)
   })
 
   it('creates the provided files', async () => {

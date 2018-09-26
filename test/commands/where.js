@@ -8,12 +8,14 @@ const {
 } = require('./_utils.js')
 
 describe('hey where', () => {
-  before(() => {
-    return createFixtures({ 'where': [] })
+  let fixtureNames
+
+  before(async () => {
+    fixtureNames = await createFixtures({ 'where': [] })
   })
 
   after(() => {
-    return removeFixtures(['where'])
+    return removeFixtures(fixtureNames)
   })
 
   it('outputs the cwd', async () => {

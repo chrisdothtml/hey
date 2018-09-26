@@ -6,14 +6,16 @@ const {
 } = require('./_utils.js')
 
 describe('hey make', () => {
-  before(() => {
-    return createFixtures({
+  let fixtureNames
+
+  before(async () => {
+    fixtureNames = await createFixtures({
       'make': []
     })
   })
 
   after(() => {
-    return removeFixtures(['make'])
+    return removeFixtures(fixtureNames)
   })
 
   it('is an alias for `create`', async () => {
