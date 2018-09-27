@@ -6,7 +6,7 @@ const path = require('path')
 const shell = require('shelljs')
 const { expect } = require('chai')
 const { promisify } = require('util')
-const { isDirectory, makeDir } = require('../../lib/_utils.js')
+const { isDirectory, makeDir, removeNonEmptyDirs } = require('../../lib/_utils.js')
 
 const execFile = promisify(childProcess.execFile)
 const ROOT_PATH = path.resolve(__dirname, '../..')
@@ -88,18 +88,6 @@ exports.testFixture = async function (fixture, expected) {
   })
 
   expect(
-    // filter out directories that have files in them
-    // (i.e. only include directories in array if they're empty)
-    filepaths.filter((filepath, i, filepaths) => {
-      let dirAlreadyRepresented = false
-
-      if (isDirectory(filepath)) {
-        dirAlreadyRepresented = filepaths.some(otherFilepath => {
-          return filepath === path.dirname(otherFilepath)
-        })
-      }
-
-      return !dirAlreadyRepresented
-    })
+    filepaths.filter(removeNonEmptyDirs)
   ).to.have.members(expected)
 }
