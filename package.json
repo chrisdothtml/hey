@@ -51,7 +51,6 @@
     "fs-extra": "^7.0.0",
     "globby": "^8.0.1",
     "kleur": "^2.0.2",
-    "shelljs": "^0.8.1",
     "trash": "^4.3.0"
   },
   "devDependencies": {

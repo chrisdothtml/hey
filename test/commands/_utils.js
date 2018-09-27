@@ -3,10 +3,9 @@ const fse = require('fs-extra')
 const globby = require('globby')
 const meta = require('../../package.json')
 const path = require('path')
-const shell = require('shelljs')
 const { expect } = require('chai')
 const { promisify } = require('util')
-const { isDirectory, makeDir, removeNonEmptyDirs } = require('../../lib/_utils.js')
+const { isDirectory, removeNonEmptyDirs } = require('../../lib/_utils.js')
 
 const execFile = promisify(childProcess.execFile)
 const ROOT_PATH = path.resolve(__dirname, '../..')
@@ -29,25 +28,21 @@ exports.createFixtures = async function (fixtures) {
       const fixtureDir = path.join(FIXTURES_DIR, fixtureName)
       const filepaths = fixtures[fixtureName]
 
-      await makeDir(fixtureDir, { silentFail: true })
+      await fse.ensureDir(fixtureDir)
       await Promise.all(
         filepaths
           .map(normalizeSlashes.bind(null, 'os'))
           // prepend path to fixture dir
           .map(filepath => path.join(fixtureDir, filepath))
           .map(async (filepath) => {
-            const { base, dir, name } = path.parse(filepath)
+            const { dir, name } = path.parse(filepath)
             const hasFile = isDirectory(name)
             const dirPath = hasFile ? dir : filepath
 
-            await makeDir(dirPath, { silentFail: true })
+            await fse.ensureDir(dirPath)
 
             if (hasFile) {
-              const origCwd = process.cwd()
-
-              shell.cd(dirPath)
-              shell.touch(base)
-              shell.cd(origCwd)
+              await fse.writeFile(filepath, '', 'utf-8')
             }
           })
       )

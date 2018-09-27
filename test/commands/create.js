@@ -42,6 +42,6 @@ describe('hey create', () => {
 
   it('warns if a provided file already exists', async () => {
     const result = await runWithFixture('createDuplicate', 'hey create foo.txt')
-    expect(result).to.include('create: already exists: foo.txt')
+    expect(result).to.include('already exists: foo.txt')
   })
 })
