@@ -5,7 +5,7 @@ const meta = require('../../package.json')
 const path = require('path')
 const { expect } = require('chai')
 const { promisify } = require('util')
-const { isDirectory, removeNonEmptyDirs } = require('../../lib/_utils.js')
+const { isDirectory, removeNonEmptyDirs } = require('../../lib/utils.js')
 
 const execFile = promisify(childProcess.execFile)
 const ROOT_PATH = path.resolve(__dirname, '../..')
