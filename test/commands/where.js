@@ -1,25 +1,23 @@
-const path = require('path')
-const { expect } = require('chai')
-const {
-  FIXTURES_DIR,
+import path from 'path'
+import test from 'ava'
+import {
   createFixtures,
+  FIXTURES_DIR,
   removeFixtures,
   runWithFixture
-} = require('./_utils.js')
+} from './_utils.js'
 
-describe('hey where', () => {
-  let fixtureNames
+let fixtureNames
 
-  before(async () => {
-    fixtureNames = await createFixtures({ 'where': [] })
-  })
+test.before(async () => {
+  fixtureNames = await createFixtures({ 'where': [] })
+})
 
-  after(() => {
-    return removeFixtures(fixtureNames)
-  })
+test.after(() => {
+  return removeFixtures(fixtureNames)
+})
 
-  it('outputs the cwd', async () => {
-    const result = await runWithFixture('where', 'hey where am I')
-    expect(result).to.equal(path.join(FIXTURES_DIR, 'where'))
-  })
+test('outputs the cwd', async (t) => {
+  const result = await runWithFixture('where', 'hey where am I')
+  t.true(result === path.join(FIXTURES_DIR, 'where'))
 })

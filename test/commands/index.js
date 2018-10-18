@@ -1,44 +1,40 @@
-const hey = require('../../lib/index.js')
-const path = require('path')
-const { expect } = require('chai')
-const {
+import hey from '../../lib/index.js'
+import path from 'path'
+import test from 'ava'
+import {
   createFixtures,
   FIXTURES_DIR,
   removeFixtures,
   runWithFixture,
   testFixture
-} = require('./_utils.js')
+} from './_utils.js'
 
-describe('hey', () => {
-  it('throws an error for invalid input', async () => {
-    let result = ''
+test('throws an error for invalid input', async (t) => {
+  let result = ''
 
-    try {
-      await hey({})
-    } catch (error) { result = error.message }
+  try {
+    await hey({})
+  } catch (error) { result = error.message }
 
-    expect(result).to.contain('invalid input')
+  t.true(result.includes('invalid input'))
+})
+
+test('throws an error for invalid commands', async (t) => {
+  const result = await runWithFixture('', 'hey invalid')
+  t.true(result.includes('invalid command'))
+})
+
+test.before(() => {
+  return createFixtures({
+    'api': []
   })
+})
 
-  it('throws an error for invalid commands', async () => {
-    const result = await runWithFixture('', 'hey invalid')
-    expect(result).to.contain('invalid command')
-  })
+test.after(() => {
+  return removeFixtures(['api'])
+})
 
-  describe('via the node api', () => {
-    before(() => {
-      return createFixtures({
-        'api': []
-      })
-    })
-
-    after(() => {
-      return removeFixtures(['api'])
-    })
-
-    it('parses a string into arguments', async () => {
-      await hey('make foo.txt', { cwd: path.join(FIXTURES_DIR, 'api') })
-      await testFixture('api', ['foo.txt'])
-    })
-  })
+test('parses a string into arguments', async (t) => {
+  await hey('make foo.txt', { cwd: path.join(FIXTURES_DIR, 'api') })
+  await testFixture(t, 'api', ['foo.txt'])
 })

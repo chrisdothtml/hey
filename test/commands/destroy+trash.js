@@ -1,9 +1,11 @@
-const {
+import test from 'ava'
+import {
   createFixtures,
   removeFixtures,
   runWithFixture,
   testFixture
-} = require('./_utils.js')
+} from './_utils.js'
+
 const aliasMap = new Map([
   ['destroy', 'remove'],
   ['trash', 'delete']
@@ -11,22 +13,20 @@ const aliasMap = new Map([
 
 // running the same suite for both aliases
 for (const [ alias, command ] of aliasMap) {
-  describe(`hey ${alias}`, () => {
-    let fixtureNames
+  let fixtureNames
 
-    before(async () => {
-      fixtureNames = await createFixtures({
-        [alias]: ['foo.txt', 'bar.js']
-      })
+  test.before(async () => {
+    fixtureNames = await createFixtures({
+      [alias]: ['foo.txt', 'bar.js']
     })
+  })
 
-    after(() => {
-      return removeFixtures(fixtureNames)
-    })
+  test.after(() => {
+    return removeFixtures(fixtureNames)
+  })
 
-    it(`is an alias for \`${command}\``, async () => {
-      await runWithFixture(alias, `hey ${alias} *`)
-      await testFixture(alias, [])
-    })
+  test(`is an alias for \`${command}\``, async (t) => {
+    await runWithFixture(alias, `hey ${alias} *`)
+    await testFixture(t, alias, [])
   })
 }

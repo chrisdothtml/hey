@@ -1,47 +1,45 @@
-const { expect } = require('chai')
-const {
+import test from 'ava'
+import {
   createFixtures,
   removeFixtures,
   runWithFixture,
   testFixture
-} = require('./_utils.js')
+} from './_utils.js'
 
-describe('hey create', () => {
-  let fixtureNames
+let fixtureNames
 
-  before(async () => {
-    fixtureNames = await createFixtures({
-      'create': [],
-      'createDeep': [],
-      'createDuplicate': ['foo.txt'],
-      'createIn': []
-    })
+test.before(async () => {
+  fixtureNames = await createFixtures({
+    'create': [],
+    'createDeep': [],
+    'createDuplicate': ['foo.txt'],
+    'createIn': []
   })
+})
 
-  after(() => {
-    return removeFixtures(fixtureNames)
-  })
+test.after(() => {
+  return removeFixtures(fixtureNames)
+})
 
-  it('creates the provided files', async () => {
-    await runWithFixture('create', 'hey create foo.txt bar.js baz')
-    await testFixture('create', ['foo.txt', 'bar.js', 'baz'])
-  })
+test('creates the provided files', async (t) => {
+  await runWithFixture('create', 'hey create foo.txt bar.js baz')
+  await testFixture(t, 'create', ['foo.txt', 'bar.js', 'baz'])
+})
 
-  it('creates the provided files in the provided directory', async () => {
-    await runWithFixture('createIn', 'hey create foo.txt bar.js in subDir')
-    await testFixture('createIn', ['subDir/foo.txt', 'subDir/bar.js'])
-  })
+test('creates the provided files in the provided directory', async (t) => {
+  await runWithFixture('createIn', 'hey create foo.txt bar.js in subDir')
+  await testFixture(t, 'createIn', ['subDir/foo.txt', 'subDir/bar.js'])
+})
 
-  it('creates the provided deep files', async () => {
-    await runWithFixture('createDeep', 'hey create deeper/foo.txt bar.js in deep')
-    await testFixture('createDeep', [
-      'deep/deeper/foo.txt',
-      'deep/bar.js'
-    ])
-  })
+test('creates the provided deep files', async (t) => {
+  await runWithFixture('createDeep', 'hey create deeper/foo.txt bar.js in deep')
+  await testFixture(t, 'createDeep', [
+    'deep/deeper/foo.txt',
+    'deep/bar.js'
+  ])
+})
 
-  it('warns if a provided file already exists', async () => {
-    const result = await runWithFixture('createDuplicate', 'hey create foo.txt')
-    expect(result).to.include('already exists: foo.txt')
-  })
+test('warns if a provided file already exists', async (t) => {
+  const result = await runWithFixture('createDuplicate', 'hey create foo.txt')
+  t.true(result.includes('already exists: foo.txt'))
 })

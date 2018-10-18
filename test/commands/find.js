@@ -1,30 +1,29 @@
-const { expect } = require('chai')
-const {
+import test from 'ava'
+import {
   createFixtures,
   removeFixtures,
   runWithFixture
-} = require('./_utils.js')
+} from './_utils.js'
 
 const FIXTURES = {
   'find': ['foo.js']
 }
 
-describe('hey find', () => {
-  let fixtureNames
+let fixtureNames
 
-  before(async () => {
-    fixtureNames = await createFixtures(FIXTURES)
-  })
+test.before(async () => {
+  fixtureNames = await createFixtures(FIXTURES)
+})
 
-  after(() => {
-    return removeFixtures(fixtureNames)
-  })
+test.after(() => {
+  return removeFixtures(fixtureNames)
+})
 
-  it('is an alias for `list`', async () => {
-    const result = await runWithFixture('find', 'hey find *.js')
+test('is an alias for `list`', async (t) => {
+  const result = await runWithFixture('find', 'hey find *.js')
 
-    expect(
-      result.split('\n')
-    ).to.have.members(FIXTURES.find)
-  })
+  t.deepEqual(
+    result.split('\n').sort(),
+    FIXTURES.find.sort()
+  )
 })

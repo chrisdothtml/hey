@@ -1,26 +1,23 @@
-const childProcess = require('child_process')
-const fse = require('fs-extra')
-const globby = require('globby')
-const meta = require('../../package.json')
-const path = require('path')
-const { expect } = require('chai')
-const { promisify } = require('util')
-const { isDirectory, removeNonEmptyDirs } = require('../../lib/utils.js')
+import childProcess from 'child_process'
+import fse from 'fs-extra'
+import globby from 'globby'
+import meta from '../../package.json'
+import path from 'path'
+import { promisify } from 'util'
+import { isDirectory, removeNonEmptyDirs } from '../../lib/utils.js'
 
 const execFile = promisify(childProcess.execFile)
 const ROOT_PATH = path.resolve(__dirname, '../..')
 const BIN_PATH = path.resolve(ROOT_PATH, meta.bin.hey)
-const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
 
-exports.FIXTURES_DIR = FIXTURES_DIR
+export const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
 
-function normalizeSlashes (type, filepath) {
+export function normalizeSlashes (type, filepath) {
   const slash = type === 'os' ? path.sep : type
   return filepath.replace(/\\|\//g, slash)
 }
-exports.normalizeSlashes = normalizeSlashes
 
-exports.createFixtures = async function (fixtures) {
+export async function createFixtures (fixtures) {
   const fixtureNames = Object.keys(fixtures)
 
   await Promise.all(
@@ -52,7 +49,7 @@ exports.createFixtures = async function (fixtures) {
   return fixtureNames
 }
 
-exports.removeFixtures = async function (fixtures = []) {
+export async function removeFixtures (fixtures = []) {
   return Promise.all(
     fixtures.map(async (fixtureName) => {
       return fse.remove(path.join(FIXTURES_DIR, fixtureName))
@@ -60,7 +57,7 @@ exports.removeFixtures = async function (fixtures = []) {
   )
 }
 
-exports.runWithFixture = async function (fixture, command) {
+export async function runWithFixture (fixture, command) {
   const fixtureDir = fixture ? path.join(FIXTURES_DIR, fixture) : process.cwd()
   const args = command.split(' ')
   const result = await execFile(process.execPath, [BIN_PATH].concat(args.slice(1)), {
@@ -74,7 +71,7 @@ exports.runWithFixture = async function (fixture, command) {
   return result.stderr || (result.stdout || '').replace(/\n$/, '')
 }
 
-exports.testFixture = async function (fixture, expected) {
+export async function testFixture (t, fixture, expected) {
   const fixtureDir = path.join(FIXTURES_DIR, fixture)
   const filepaths = await globby('**/*', {
     cwd: fixtureDir,
@@ -82,7 +79,8 @@ exports.testFixture = async function (fixture, expected) {
     transform: normalizeSlashes.bind(null, '/')
   })
 
-  expect(
-    filepaths.filter(removeNonEmptyDirs)
-  ).to.have.members(expected)
+  t.deepEqual(
+    filepaths.filter(removeNonEmptyDirs).sort(),
+    expected.sort()
+  )
 }

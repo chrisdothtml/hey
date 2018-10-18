@@ -1,25 +1,24 @@
-const {
+import test from 'ava'
+import {
   createFixtures,
   removeFixtures,
   runWithFixture,
   testFixture
-} = require('./_utils.js')
+} from './_utils.js'
 
-describe('hey make', () => {
-  let fixtureNames
+let fixtureNames
 
-  before(async () => {
-    fixtureNames = await createFixtures({
-      'make': []
-    })
+test.before(async () => {
+  fixtureNames = await createFixtures({
+    'make': []
   })
+})
 
-  after(() => {
-    return removeFixtures(fixtureNames)
-  })
+test.after(() => {
+  return removeFixtures(fixtureNames)
+})
 
-  it('is an alias for `create`', async () => {
-    await runWithFixture('make', 'hey make foo.txt')
-    await testFixture('make', ['foo.txt'])
-  })
+test('is an alias for `create`', async (t) => {
+  await runWithFixture('make', 'hey make foo.txt')
+  await testFixture(t, 'make', ['foo.txt'])
 })

@@ -1,11 +1,11 @@
-const path = require('path')
-const { expect } = require('chai')
-const {
+import path from 'path'
+import test from 'ava'
+import {
   createFixtures,
   normalizeSlashes,
   removeFixtures,
   runWithFixture
-} = require('./_utils.js')
+} from './_utils.js'
 
 const FIXTURES = {
   'list': [
@@ -26,48 +26,48 @@ const FIXTURES = {
   ]
 }
 
-describe('hey list', () => {
-  let fixtureNames
+let fixtureNames
 
-  before(async () => {
-    fixtureNames = await createFixtures(FIXTURES)
-  })
+test.before(async () => {
+  fixtureNames = await createFixtures(FIXTURES)
+})
 
-  after(() => {
-    return removeFixtures(fixtureNames)
-  })
+test.after(() => {
+  return removeFixtures(fixtureNames)
+})
 
-  it('outputs files in current directory if no pattern provided', async () => {
-    const result = await runWithFixture('list', 'hey list')
+test('outputs files in current directory if no pattern provided', async (t) => {
+  const result = await runWithFixture('list', 'hey list')
 
-    expect(
-      normalizeSlashes('/', result).split('\n')
-    ).to.have.members(FIXTURES.list)
-  })
+  t.deepEqual(
+    normalizeSlashes('/', result).split('\n').sort(),
+    FIXTURES.list.sort()
+  )
+})
 
-  it('outputs only files matching the provided pattern', async () => {
-    const result = await runWithFixture('list', 'hey list *.js')
+test('outputs only files matching the provided pattern', async (t) => {
+  const result = await runWithFixture('list', 'hey list *.js')
 
-    expect(
-      normalizeSlashes('/', result).split('\n')
-    ).to.have.members(
-      FIXTURES.list.filter(filepath => path.extname(filepath) === '.js')
-    )
-  })
+  t.deepEqual(
+    normalizeSlashes('/', result).split('\n').sort(),
+    FIXTURES.list.filter(filepath => path.extname(filepath) === '.js').sort()
+  )
+})
 
-  it('outputs deep files matching the provided pattern', async () => {
-    const result = await runWithFixture('listDeep', 'hey list **/*')
+test('outputs deep files matching the provided pattern', async (t) => {
+  const result = await runWithFixture('listDeep', 'hey list **/*')
 
-    expect(
-      normalizeSlashes('/', result).split('\n')
-    ).to.have.members(FIXTURES.listDeep)
-  })
+  t.deepEqual(
+    normalizeSlashes('/', result).split('\n').sort(),
+    FIXTURES.listDeep.sort()
+  )
+})
 
-  it('outputs files matching the provided pattern from the provided directory', async () => {
-    const result = await runWithFixture('listFrom', 'hey list *.* from subDir')
+test('outputs files matching the provided pattern from the provided directory', async (t) => {
+  const result = await runWithFixture('listFrom', 'hey list *.* from subDir')
 
-    expect(
-      normalizeSlashes('/', result).split('\n')
-    ).to.have.members(FIXTURES.listFrom)
-  })
+  t.deepEqual(
+    normalizeSlashes('/', result).split('\n').sort(),
+    FIXTURES.listFrom.sort()
+  )
 })
