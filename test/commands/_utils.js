@@ -25,6 +25,7 @@ export async function createFixtures (fixtures) {
       const fixtureDir = path.join(FIXTURES_DIR, fixtureName)
       const filepaths = fixtures[fixtureName]
 
+      await fse.remove(fixtureDir)
       await fse.ensureDir(fixtureDir)
       await Promise.all(
         filepaths
