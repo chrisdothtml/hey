@@ -3,6 +3,8 @@ os:
   - linux
   - osx
   - windows
+env:
+  - YARN_GPG=no
 node_js:
   - lts/*
   - node
