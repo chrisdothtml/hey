@@ -6,6 +6,7 @@
 - [find](#find)
 - [list](#list)
 - [make](#make)
+- [move](#move)
 - [remove](#remove)
 - [trash](#trash)
 - [where](#where)
@@ -50,6 +51,18 @@ $ hey list '*.txt' from some/dir
 ### make
 
 Alias for [create](#create)
+
+### move
+
+Move files/directories. Use `--flat` to flatten directory structure
+
+```bash
+$ hey move '*.txt' into some/dir
+$ hey move '*.txt' to some/dir
+$ hey move '*.txt' from dir into other/dir
+$ hey move '*.txt' in dir to other/dir
+$ hey move '**/*.png' into assets/img --flat
+```
 
 ### remove
 
