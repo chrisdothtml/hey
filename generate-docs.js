@@ -59,11 +59,11 @@ function render (commands) {
     ${commands
       // command docs
       .map(command => {
-        let { description } = command
-        let output = `### ${command.name}`
+        let { alias, description, example, name } = command
+        let output = `### ${name}`
 
-        if (command.alias) {
-          description = `Alias for #${command.alias}`
+        if (alias) {
+          description = `Alias for #${alias}`
         }
 
         if (description) {
@@ -71,9 +71,11 @@ function render (commands) {
           output += description.replace(/#\w+/g, hashToMDLink)
         }
 
-        if (command.example) {
+        if (example) {
+          example = example.replace(/\*\\\//g, '*/')
+
           output += '\n\n```bash\n'
-          output += command.example
+          output += example
             .split('\n')
             .map(line => `$ ${line}`)
             .join('\n')
