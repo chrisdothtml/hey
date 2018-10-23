@@ -7,7 +7,7 @@ import {
   removeFixtures,
   runWithFixture,
   testFixture
-} from './_utils.js'
+} from '../_utils.js'
 
 test('throws an error for invalid input', async (t) => {
   let result = ''

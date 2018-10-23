@@ -4,7 +4,7 @@ import {
   removeFixtures,
   runWithFixture,
   testFixture
-} from './_utils.js'
+} from '../_utils.js'
 
 let fixtureNames
 

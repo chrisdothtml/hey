@@ -4,7 +4,7 @@ import {
   removeFixtures,
   runWithFixture,
   testFixture
-} from './_utils.js'
+} from '../_utils.js'
 
 // running the same suite for both commands
 for (const command of ['delete', 'remove']) {

@@ -1,13 +1,13 @@
 import childProcess from 'child_process'
 import fse from 'fs-extra'
 import globby from 'globby'
-import meta from '../../package.json'
+import meta from '../package.json'
 import path from 'path'
 import { promisify } from 'util'
-import { isDirectory, removeNonEmptyDirs } from '../../lib/utils.js'
+import { isDirectory, removeNonEmptyDirs } from '../lib/utils.js'
 
 const execFile = promisify(childProcess.execFile)
-const ROOT_PATH = path.resolve(__dirname, '../..')
+const ROOT_PATH = path.resolve(__dirname, '..')
 const BIN_PATH = path.resolve(ROOT_PATH, meta.bin.hey)
 
 export const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')

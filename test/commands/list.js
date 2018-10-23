@@ -5,7 +5,7 @@ import {
   normalizeSlashes,
   removeFixtures,
   runWithFixture
-} from './_utils.js'
+} from '../_utils.js'
 
 const FIXTURES = {
   'list': [
