@@ -39,6 +39,7 @@
   },
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "docs": "node generate-docs.js",
     "lint": "standard '*(lib|test)/**/*.js' --verbose | snazzy",
     "prepush": "npm run lint",
     "test": "ava -v",
@@ -62,6 +63,7 @@
   "devDependencies": {
     "ava": "^0.25.0",
     "coveralls": "^3.0.0",
+    "doctrine": "^2.1.0",
     "esm": "^3.0.84",
     "husky": "^0.14.3",
     "nyc": "^11.7.1",

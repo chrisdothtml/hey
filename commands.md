@@ -16,7 +16,7 @@ Create new files/directories
 
 ```bash
 $ hey create dir/file.txt
-$ hey create dir/that/doesnt/exist
+$ hey create deep/dir/that/doesnt/exist
 $ hey create file.txt other-file.txt in dir
 $ hey create file.txt in dir/that/doesnt/exist
 ```
@@ -70,5 +70,5 @@ Alias for [delete](#delete)
 Print current working directory
 
 ```bash
-$ hey where am I
+$ hey where am i
 ```
