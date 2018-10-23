@@ -9,8 +9,7 @@ import { isDirectory, removeNonEmptyDirs } from '../lib/utils.js'
 const execFile = promisify(childProcess.execFile)
 const ROOT_PATH = path.resolve(__dirname, '..')
 const BIN_PATH = path.resolve(ROOT_PATH, meta.bin.hey)
-
-export const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
+const FIXTURES_DIR = path.join(ROOT_PATH, '.temp')
 
 export function normalizeSlashes (type, filepath) {
   const slash = type === 'os' ? path.sep : type
@@ -76,11 +75,11 @@ export async function runWithFixture (fixture, command) {
   return result.stderr || (result.stdout || '').replace(/\n$/, '')
 }
 
-export async function testFixture (t, fixture, expected) {
+export async function testFixture (t, fixture, expected, options = {}) {
   const fixtureDir = path.join(FIXTURES_DIR, fixture)
   const filepaths = await globby('**/*', {
     cwd: fixtureDir,
-    onlyFiles: false,
+    onlyFiles: !options.includeEmptyDirs,
     transform: normalizeSlashes.bind(null, '/')
   })
 

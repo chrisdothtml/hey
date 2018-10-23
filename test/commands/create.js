@@ -23,7 +23,7 @@ test.after(() => {
 
 test('creates the provided files', async (t) => {
   await runWithFixture('create', 'hey create foo.txt bar.js baz')
-  await testFixture(t, 'create', ['foo.txt', 'bar.js', 'baz'])
+  await testFixture(t, 'create', ['foo.txt', 'bar.js', 'baz'], { includeEmptyDirs: true })
 })
 
 test('creates the provided files in the provided directory', async (t) => {

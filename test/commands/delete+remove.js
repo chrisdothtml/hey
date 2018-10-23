@@ -39,11 +39,19 @@ for (const command of ['delete', 'remove']) {
 
   test(`${command}s the provided directories`, async (t) => {
     await runWithFixture(`${command}Dir`, `hey ${command} subDir/*`)
-    await testFixture(t, `${command}Dir`, ['foo.txt', 'subDir'])
+    await testFixture(t,
+      `${command}Dir`,
+      ['foo.txt', 'subDir'],
+      { includeEmptyDirs: true }
+    )
   })
 
   test(`${command}s the provided files from the provided directory`, async (t) => {
     await runWithFixture(`${command}From`, `hey ${command} * from subDir`)
-    await testFixture(t, `${command}From`, ['subDir'])
+    await testFixture(t,
+      `${command}From`,
+      ['subDir'],
+      { includeEmptyDirs: true }
+    )
   })
 }
