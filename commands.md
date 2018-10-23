@@ -10,7 +10,7 @@
 - [trash](#trash)
 - [where](#where)
 
-### create
+## create
 
 Create new files/directories
 
@@ -21,7 +21,7 @@ $ hey create file.txt other-file.txt in dir
 $ hey create file.txt in dir/that/doesnt/exist
 ```
 
-### delete
+## delete
 
 Move files/directories to trash
 
@@ -31,15 +31,15 @@ $ hey delete '*.txt' from dir
 $ hey delete '*.txt' in dir
 ```
 
-### destroy
+## destroy
 
 Alias for [remove](#remove)
 
-### find
+## find
 
 Alias for [list](#list)
 
-### list
+## list
 
 ```bash
 $ hey list '*.txt'
@@ -47,11 +47,11 @@ $ hey list '*.txt' in some/dir
 $ hey list '*.txt' from some/dir
 ```
 
-### make
+## make
 
 Alias for [create](#create)
 
-### remove
+## remove
 
 Remove files/directories (**does not move to trash; use [delete](#delete) or [trash](#trash) for that**)
 
@@ -61,11 +61,11 @@ $ hey remove '*.txt' from dir
 $ hey remove '*.txt' in dir
 ```
 
-### trash
+## trash
 
 Alias for [delete](#delete)
 
-### where
+## where
 
 Print current working directory
 

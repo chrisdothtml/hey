@@ -60,7 +60,7 @@ function render (commands) {
       // command docs
       .map(command => {
         let { description } = command
-        let output = `### ${command.name}`
+        let output = `## ${command.name}`
 
         if (command.alias) {
           description = `Alias for #${command.alias}`
