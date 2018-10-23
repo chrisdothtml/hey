@@ -50,6 +50,10 @@ export async function createFixtures (fixtures) {
   return fixtureNames
 }
 
+export function getFixturePath (fixtureName) {
+  return path.join(FIXTURES_DIR, fixtureName)
+}
+
 export async function removeFixtures (fixtures = []) {
   return Promise.all(
     fixtures.map(async (fixtureName) => {
