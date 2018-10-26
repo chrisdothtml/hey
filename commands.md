@@ -57,7 +57,7 @@ Alias for [create](#create)
 Move files/directories. Use `--flat` to flatten directory structure
 
 ```bash
-$ hey move '*.txt' into .
+$ hey move 'some/dir/*' into .
 $ hey move '*.txt' into some/dir
 $ hey move '*.txt' to some/dir
 $ hey move '*.txt' from dir into other/dir
