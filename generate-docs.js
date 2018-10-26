@@ -7,10 +7,10 @@ const COMMANDS_DIR = path.resolve(__dirname, 'lib/commands')
 async function getCommands () {
   return Promise.all(
     (await fse.readdir(COMMANDS_DIR))
-      .filter(filename => filename.charAt(0) === '_')
+      .filter(filename => filename !== '.DS_Store')
       .sort()
       .map(async (filename) => {
-        const commandName = filename.slice(1, -3)
+        const commandName = filename.slice(0, -3)
         const filepath = path.join(COMMANDS_DIR, filename)
         const content = await fse.readFile(filepath, 'utf-8')
         const jsdoc = doctrine.parse(
