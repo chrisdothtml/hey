@@ -51,9 +51,6 @@
   "nyc": {
     "require": "esm"
   },
-  "standard": {
-    "env": "mocha"
-  },
   "dependencies": {
     "fs-extra": "^7.0.0",
     "globby": "^8.0.1",
