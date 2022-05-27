@@ -55,7 +55,7 @@
     "env": "mocha"
   },
   "dependencies": {
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^8.0.0",
     "globby": "^8.0.1",
     "kleur": "^2.0.2",
     "trash": "^4.3.0"
